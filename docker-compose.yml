@@ -1,0 +1,26 @@
+services:
+  t-1985:
+    build:
+      context: .
+      dockerfile: docker/T1985.prod.dockerfile
+    container_name: t-1985
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./models:/workspace/llama.cpp/models
+    tty: true
+
+  t-1985-factory:
+    build:
+      context: .
+      dockerfile: docker/T1985_factory.dockerfile
+    container_name: t-1985-factory
+    volumes:
+      - ./llama.cpp:/opt/llama_builder/llama.cpp
+      - ./package:/data/package
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    tty: true
+    entrypoint: T1985_factory_entrypoint.sh

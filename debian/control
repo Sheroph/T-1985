@@ -1,0 +1,7 @@
+Package: llama-t1985
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: amd64
+Maintainer: sheroph <sheroph@protonmail.com>
+Description: llama.cpp compiled with CUDA to have GPU acceleration
