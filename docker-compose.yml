@@ -8,7 +8,9 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
-      - ./models:/workspace/llama.cpp/models
+      - ./models:/opt/llama-t1985/models:ro
+    ports:
+      - 8080:8080
     tty: true
 
   t-1985-factory:
