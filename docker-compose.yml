@@ -1,8 +1,11 @@
 services:
   t-1985:
     build:
+      args:
+        GROUP_ID: ${GROUP_ID}
+        USER_ID: ${USER_ID}
       context: .
-      dockerfile: docker/T1985.prod.dockerfile
+      dockerfile: docker/t1985.dockerfile
     container_name: t-1985
     runtime: nvidia
     environment:
@@ -11,18 +14,20 @@ services:
       - ./models:/opt/llama-t1985/models:ro
     ports:
       - 8080:8080
-    tty: true
+    entrypoint: "llama-server"
+    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf
 
-  t-1985-factory:
+  skynet:
     build:
+      args:
+        GROUP_ID: ${GROUP_ID}
+        USER_ID: ${USER_ID}
       context: .
-      dockerfile: docker/T1985_factory.dockerfile
-    container_name: t-1985-factory
+      dockerfile: docker/skynet.dockerfile
+    container_name: skynet
     volumes:
-      - ./llama.cpp:/opt/llama_builder/llama.cpp
       - ./package:/data/package
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
-    tty: true
-    entrypoint: T1985_factory_entrypoint.sh
+    entrypoint: skynet_entrypoint.sh

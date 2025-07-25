@@ -11,20 +11,19 @@ RUN apt-get update && \
                         python3 python3-pip python3-venv \
                         ninja-build \
                         /tmp/llama-t1985.deb && \
-    apt-get clean && rm /tmp/llama-t1985.deb
+    apt-get clean && rm /tmp/llama-t1985.deb && \
+    groupadd -g ${GID} cyborgs && \
+    useradd -m -u ${UID} -g ${GID} -s /usr/sbin/nologin T-1985
 
-RUN groupadd -g ${GID} prodgroup && \
-    useradd -m -u ${UID} -g ${GID} -s /usr/sbin/nologin produser
-
-USER produser
+USER T-1985
 
 WORKDIR /app
-RUN chown produser:prodgroup -R /app
+RUN chown T-1985:cyborgs -R /app
 COPY docker/requirements.txt /app/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# llama-server -m /opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf --host 0.0.0.0 --n-gpu-layers 50
+ENTRYPOINT [ "llama-server", "--host", "0.0.0.0", "--n-gpu-layers", "50", "-m", "/opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf"]
 
-ENTRYPOINT [ "llama-server", "-m", "/opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf", "--host", "0.0.0.0", "--n-gpu-layers", "50" ]
-CMD ["/bin/bash"]
+# Default model use by llama.cpp
+# CMD ["/opt/llama-t1985/models/default-model.gguf"]

@@ -7,3 +7,13 @@ Setup is splitted into two phases:
 1. Compile debian package of llama.cpp with GPU access
 1. Build docker image which embeds built binaries previously
 
+## How to activate me
+1. From root directory, launch :
+```bash
+./build_t1985.sh
+```
+
+
+## Some models tested
+Text generation     : mistral-7b.Q4_K_M.gguf
+Text summarization  : Medra4b.Q4_K_S.gguf
