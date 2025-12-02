@@ -20,12 +20,14 @@ export DEB_PACKAGE_TREE
 cd "${LLAMA_ROOT}" || exit 1
 
 echo "Building llama.cpp ..."
+
 cmake -B build \
     -DGGML_CUDA=ON \
+    -DCMAKE_CUDA_ARCHITECTURES="120" \
     -DCMAKE_CUDA_FLAGS="-Wno-deprecated-gpu-targets -O3" \
-    -DGGML_CCACHE=OFF \
-    -DCMAKE_BUILD_TYPE=Release && \
-cmake --build build --config Release "-j$(nproc)" && \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DGGML_BLAS=ON  && \
+cmake --build build --config Release --parallel=6  && \
 echo "llama.cpp built successfully" || echo "Llama.cpp building failed"
 
 generate_deb_package.sh

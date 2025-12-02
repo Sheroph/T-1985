@@ -2,8 +2,8 @@ services:
   t-1985:
     build:
       args:
-        GROUP_ID: ${GROUP_ID}
-        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID:-1000}
+        USER_ID: ${USER_ID:-1000}
       context: .
       dockerfile: docker/t1985.dockerfile
     container_name: t-1985
@@ -15,13 +15,13 @@ services:
     ports:
       - 8080:8080
     entrypoint: "llama-server"
-    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf
+    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/gemma-3-4b-it-Q4_K_M.gguf -c 0
 
   skynet:
     build:
       args:
-        GROUP_ID: ${GROUP_ID}
-        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID:-1000}
+        USER_ID: ${USER_ID:-1000}
       context: .
       dockerfile: docker/skynet.dockerfile
     container_name: skynet
@@ -31,3 +31,20 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
     entrypoint: skynet_entrypoint.sh
+
+  redeye:
+    build:
+      args:
+        GROUP_ID: ${GROUP_ID:-1000}
+        USER_ID: ${USER_ID:-1000}
+      context: .
+      dockerfile: docker/redeye.dockerfile
+    container_name: redeye
+    runtime: nvidia
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./models:/app/ComfyUI/models/checkpoints:ro
+      - ./output:/app/ComfyUI/output
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all

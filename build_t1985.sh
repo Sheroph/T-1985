@@ -2,7 +2,7 @@
 
 # At first build llama.cpp and generate related debian package using dedicated container
 ./build_skynet.sh
-
+./build_redeye.sh
 
 export USER_ID=$(id -u)
 export GROUP_ID=$(id -g)

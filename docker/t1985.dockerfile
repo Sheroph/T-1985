@@ -7,10 +7,11 @@ COPY package/llama-t1985.deb /tmp/
 
 RUN apt-get update && \
     apt-get install -y  libcurl4 \
-                        libcublas-12-1 \
-                        python3 python3-pip python3-venv \
-                        ninja-build \
-                        /tmp/llama-t1985.deb && \
+    libcublas-12-1 \
+    libopenblas-base \
+    python3 python3-pip python3-venv \
+    ninja-build \
+    /tmp/llama-t1985.deb && \
     apt-get clean && rm /tmp/llama-t1985.deb && \
     groupadd -g ${GID} cyborgs && \
     useradd -m -u ${UID} -g ${GID} -s /usr/sbin/nologin T-1985
@@ -19,11 +20,9 @@ USER T-1985
 
 WORKDIR /app
 RUN chown T-1985:cyborgs -R /app
-COPY docker/requirements.txt /app/
+COPY docker/requirements_t-1985.txt /app/requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
-ENTRYPOINT [ "llama-server", "--host", "0.0.0.0", "--n-gpu-layers", "50", "-m", "/opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf"]
-
-# Default model use by llama.cpp
-# CMD ["/opt/llama-t1985/models/default-model.gguf"]
+ENTRYPOINT [ "llama-server", "--host", "0.0.0.0", "--n-gpu-layers", "50", "-m", "/opt/llama-t1985/models/gemma-3-4b-it-Q4_K_M.gguf"]

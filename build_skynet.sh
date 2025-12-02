@@ -17,7 +17,7 @@ export GROUP_ID=$(id -g)
 docker compose build skynet && \
 
 echo "Consciousness initialized. Skynet is online."
-echo "Creating T-1985 brain and knwoledge..."
+echo "Creating T-1985 brain and knowledge..."
 
 docker compose up skynet
 echo "T-1985 IA waiting for instructions"

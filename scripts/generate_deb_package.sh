@@ -24,6 +24,11 @@ find "${LLAMA_BUILD_DIR}/bin" -iname '*.so' -exec cp {} "${DEB_PACKAGE_LIB}" \;
 find "${LLAMA_BUILD_DIR}" -iname '*.a' -exec cp {} "${DEB_PACKAGE_LIB}" \;
 find "${LLAMA_BUILD_DIR}/bin" -iname 'llama-*' -exec cp {} "${DEB_PACKAGE_BIN}" \;
 
+# add rpath to binaries to use local lib folder
+for bin in ${DEB_PACKAGE_BIN}/llama-*; do
+    patchelf --set-rpath '$ORIGIN/../lib' "$bin"
+done
+
 cd "${ROOT_DIR}" || exit 1
 echo "Generating debian package ..."
 dpkg-deb --build "${DEB_PACKAGE_TREE}"
