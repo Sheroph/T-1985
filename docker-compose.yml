@@ -32,14 +32,14 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
     entrypoint: skynet_entrypoint.sh
 
-  redeye:
+  voidgen:
     build:
       args:
         GROUP_ID: ${GROUP_ID:-1000}
         USER_ID: ${USER_ID:-1000}
       context: .
-      dockerfile: docker/redeye.dockerfile
-    container_name: redeye
+      dockerfile: docker/voidgen.dockerfile
+    container_name: voidgen
     runtime: nvidia
     ports:
       - "8188:8188"
