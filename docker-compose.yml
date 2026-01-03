@@ -13,9 +13,9 @@ services:
     volumes:
       - ./models:/opt/llama-t1985/models:ro
     ports:
-      - 8080:8080
+      - 8000:8080
     entrypoint: "llama-server"
-    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf -c 0
+    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf -c 0 --no-webui --chat-template mistral
 
   skynet:
     build:
@@ -42,10 +42,21 @@ services:
     container_name: voidgen
     runtime: nvidia
     ports:
-      - "8188:8188"
+      - "8002:8188"
     volumes:
       - ./models:/app/ComfyUI/models:ro
       - ./loras:/app/ComfyUI/loras:ro
       - ./output:/app/ComfyUI/output
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
+
+  openwebui:
+      image: ghcr.io/open-webui/open-webui:main
+      environment:
+        - OPENAI_API_BASE_URL=http://t-1985:8080/v1
+        - OPENAI_API_KEY=local
+        - ENABLE_OLLAMA_API=false
+      ports:
+        - "8001:8080"
+      depends_on:
+        - t-1985
