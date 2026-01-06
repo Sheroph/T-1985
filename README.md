@@ -27,10 +27,11 @@ Together, they form the early stages of something resembling **Skynet**—intent
 
 ## Architecture Overview
 
-The project is composed of three main modules:
+The project is composed of four main modules:
 
 - Skynet
 - T-1985
+- Link-85
 - VoidGen
 
 Each module is isolated, containerized, and designed to behave like a subsystem in a larger machine network.
@@ -58,7 +59,7 @@ Skynet insists this is not a problem.
 ---
 
 ### T-1985  
-**LLM Runtime / AI Assistant**
+**LLM Runtime**
 
 **T-1985** is the operational AI unit.
 
@@ -71,6 +72,19 @@ This Docker image:
 
 T-1985 is intentionally simple, reliable, and slightly outdated—by design.  
 It represents a first-generation machine intelligence: effective, but not perfect.
+
+---
+
+### Link-85
+**AI Assistant**
+
+**Link-85** is the interface to AI unit.
+
+> *Your friendly gateway to machine domination (just don’t unplug it).*
+
+This Docker image:
+- Exposes OpenWebUI API/Interface
+- Forwards requests to T-1985
 
 ---
 

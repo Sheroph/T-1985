@@ -197,3 +197,8 @@ cython_debug/
 .cursorindexingignore
 .vscode
 output
+logbooks
+project_specs
+voidgen_data
+link-85_data
+llama.cpp

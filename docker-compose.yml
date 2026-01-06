@@ -15,7 +15,7 @@ services:
     ports:
       - 8000:8080
     entrypoint: "llama-server"
-    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/mistral-7b.Q4_K_M.gguf -c 0 --no-webui --chat-template mistral
+    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf -c 0
 
   skynet:
     build:
@@ -47,10 +47,11 @@ services:
       - ./models:/app/ComfyUI/models:ro
       - ./loras:/app/ComfyUI/loras:ro
       - ./output:/app/ComfyUI/output
+      - ./voidgen_data:/app/comfyUI/user
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
 
-  openwebui:
+  link-85:
       image: ghcr.io/open-webui/open-webui:main
       environment:
         - OPENAI_API_BASE_URL=http://t-1985:8080/v1
@@ -60,3 +61,5 @@ services:
         - "8001:8080"
       depends_on:
         - t-1985
+      volumes:
+        - ./link-85_data:/app/backend/data
