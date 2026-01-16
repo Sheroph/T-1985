@@ -20,9 +20,4 @@ USER T-1985
 
 WORKDIR /app
 RUN chown T-1985:cyborgs -R /app
-COPY docker/requirements_t-1985.txt /app/requirements.txt
-
-RUN pip install --no-cache-dir -r requirements.txt
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-
-ENTRYPOINT [ "llama-server", "--host", "0.0.0.0", "--n-gpu-layers", "50", "-m", "/opt/llama-t1985/models/gemma-3-4b-it-Q4_K_M.gguf"]

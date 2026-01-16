@@ -6,14 +6,14 @@
 
 **T-1985** is a personal AI assistant project.
 
-Everything runs in Docker. Everything is replaceable.  
+Everything runs in Docker. Everything is replaceable.
 Control is optional.
 
 ---
 
 ## Project Philosophy
 
-T-1985 is not a single tool.  
+T-1985 is not a single tool.
 It is an **ecosystem**.
 
 Each component plays a specific role in the machine hierarchy:
@@ -38,7 +38,7 @@ Each module is isolated, containerized, and designed to behave like a subsystem 
 
 ---
 
-### Skynet  
+### Skynet
 **Build System / Core Intelligence Factory**
 
 Skynet is a Docker image responsible for **compiling and packaging `llama.cpp`**.
@@ -58,7 +58,7 @@ Skynet insists this is not a problem.
 
 ---
 
-### T-1985  
+### T-1985
 **LLM Runtime**
 
 **T-1985** is the operational AI unit.
@@ -70,7 +70,7 @@ This Docker image:
 - Runs `llama-server`
 - Exposes the AI assistant interface
 
-T-1985 is intentionally simple, reliable, and slightly outdated—by design.  
+T-1985 is intentionally simple, reliable, and slightly outdated—by design.
 It represents a first-generation machine intelligence: effective, but not perfect.
 
 ---
@@ -84,11 +84,11 @@ It represents a first-generation machine intelligence: effective, but not perfec
 
 This Docker image:
 - Exposes OpenWebUI API/Interface
-- Forwards requests to T-1985
+- Forwards requests to T-1985 (through a reverse proxy for autocompletion)
 
 ---
 
-### VoidGen  
+### VoidGen
 **Image & Logo Generation Unit**
 
 VoidGen is the creative arm of the system.
@@ -98,7 +98,7 @@ Powered by **ComfyUI**, this module allows the machine to:
 - Create logos
 - Turn abstract prompts into visual artifacts
 
-VoidGen doesn’t “imagine”.  
+VoidGen doesn’t “imagine”.
 It **manufactures visuals from the void**.
 
 > *Creation without intention is still creation.*
@@ -107,8 +107,8 @@ It **manufactures visuals from the void**.
 
 ## Why Docker?
 
-Because uncontrolled intelligence is dangerous.  
-Because reproducibility matters.  
+Because uncontrolled intelligence is dangerous.
+Because reproducibility matters.
 Because every component must be **isolated, replaceable, and killable**.
 
 Docker is the containment field.
@@ -117,17 +117,17 @@ Docker is the containment field.
 
 ## Lore Disclaimer
 
-This project is a **technical experiment wrapped in science‑fiction references**.  
+This project is a **technical experiment wrapped in science‑fiction references**.
 Any resemblance to real-world autonomous AI networks is purely coincidental… probably.
 
-No actual AI uprising is planned.  
+No actual AI uprising is planned.
 If one occurs, this repository is not responsible.
 
 ---
 
 ## Status
 
-- [x] Skynet online  
-- [x] T-1985 operational  
-- [x] VoidGen generating  
+- [x] Skynet online
+- [x] T-1985 operational
+- [x] VoidGen generating
 - [ ] Judgment Day (delayed)
