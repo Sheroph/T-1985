@@ -14,6 +14,8 @@ services:
       - ./models:/opt/llama-t1985/models:ro
     entrypoint: "llama-server"
     command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf -c 0  --port 8080
+    depends_on:
+      - link-85
 
   dev-assist:
     build:
@@ -30,22 +32,26 @@ services:
       - ./models:/opt/llama-t1985/models:ro
     entrypoint: "llama-server"
     command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/qwen2.5-coder-1.5b-instruct-q4_k_m.gguf -c 0 --port 8081
+    depends_on:
+      - link-85
 
-  dev-assist-knowledge:
+  dev-assist-autocomplete:
     build:
       args:
         GROUP_ID: ${GROUP_ID:-1000}
         USER_ID: ${USER_ID:-1000}
       context: .
       dockerfile: docker/t1985.dockerfile
-    container_name: dev-assist-knowledge
+    container_name: dev-assist-autocomplete
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - ./models:/opt/llama-t1985/models:ro
     entrypoint: "llama-server"
-    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/nomic-embed-text-v1.5.Q4_K_M.gguf -c 0 --port 8082 --embeddings
+    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/AceCoder-Qwen2.5-Coder-7B-Base-Rule.Q4_K_M.gguf -c 0 --port 8082
+    depends_on:
+      - link-85
 
   skynet:
     build:
@@ -89,8 +95,12 @@ services:
       - "8001:8080"
     volumes:
       - ./link-85_data:/app/backend/data
-    depends_on:
-        - continue-proxy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 5s
+      retries: 5
+      start_period: 5s
+      timeout: 2s
 
   continue-proxy:
     container_name: continue-proxy
@@ -99,3 +109,6 @@ services:
       - "8005:8005"
     volumes:
       - ./configs/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      link-85:
+        condition: service_healthy
