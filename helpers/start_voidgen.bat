@@ -10,6 +10,17 @@ setlocal ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
 
 cd ..\
 
+if not exist "voidgen_data" (
+    mkdir "voidgen_data"
+)
+if not exist "voidgen_data\user" (
+    mkdir "voidgen_data\user"
+)
+if not exist "voidgen_data\input" (
+    mkdir "voidgen_data\input"
+)
+
+
 docker compose up -d voidgen
 echo "Waiting for services to be operational..."
 

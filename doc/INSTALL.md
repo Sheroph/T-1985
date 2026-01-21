@@ -2,7 +2,7 @@
 
 ## Setup on Windows
 
-This project has been tested on Windows Home 11, a Nvidia RTX 5070.
+This project has been tested on Windows Home 11 with a Nvidia RTX 5070 GPU.
 
 ### Requirements
 
@@ -19,3 +19,9 @@ To build it, double-click on `build_scripts\windows\build_t1985.bat`.
 
 This step can be quite long, ~20 minutes.
 Once built is over, you can now follow usage documentation [USAGE.md](USAGE.md).
+
+### Prepare T-1985
+
+T-1985 requires some IA models in order to run.
+
+These models should be stored in `models` directory in root directory of this project, see [USAGE.md](USAGE.md) to get more information.

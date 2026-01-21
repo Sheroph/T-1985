@@ -10,10 +10,11 @@ services:
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
+      - T1985_MODEL_NAME=${T1985_model_name}
     volumes:
       - ./models:/opt/llama-t1985/models:ro
     entrypoint: "llama-server"
-    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf -c 0  --port 8080
+    command: --host 0.0.0.0 --n-gpu-layers 50 -m /opt/llama-t1985/models/${T1985_MODEL_NAME} -c 0  --port 8080
     depends_on:
       - link-85
 

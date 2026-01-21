@@ -1,6 +1,12 @@
 @echo off
 setlocal ENABLEEXTENSIONS
 
+
+call ..\..\helpers\start_docker_desktop.bat
+IF ERRORLEVEL 1 (
+    exit /b 1
+)
+
 echo "Cyberdyne Systems: You are about to compile a potentially catastrophic AI model. Proceed? ([Y]/n)"
 set /p response=
 

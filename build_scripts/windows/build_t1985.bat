@@ -1,6 +1,13 @@
 @echo off
 setlocal ENABLEEXTENSIONS
 
+REM Start docker desktop if needed
+
+call ..\..\helpers\start_docker_desktop.bat
+IF ERRORLEVEL 1 (
+    exit /b 1
+)
+
 REM At first build llama.cpp and generate related image using dedicated containers
 call build_skynet.bat
 IF ERRORLEVEL 1 (
