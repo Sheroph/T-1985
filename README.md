@@ -7,7 +7,7 @@
 **T-1985** is a personal AI assistant project.
 
 Everything runs in Docker. Everything is replaceable.
-Control is optional.
+> Control is optional.
 
 ---
 
@@ -21,7 +21,7 @@ Each component plays a specific role in the machine hierarchy:
 - one deploys it,
 - one gives it the ability to create.
 
-Together, they form the early stages of something resembling **Skynet**—intentionally limited, intentionally contained… for now.
+> Together, they form the early stages of something resembling **Skynet**—intentionally limited, intentionally contained… for now.
 
 ---
 
@@ -48,8 +48,7 @@ It acts as the industrial backbone of the project:
 - Produces reproducible LLM packages
 - Separates the “factory” from the deployed intelligence
 
-Skynet does not run models.
-Skynet **creates** them.
+> Skynet does not run models. Skynet **creates** them.
 
 ![Modular architecture of T-1985](./assets/T-1985_arch.svg)
 
@@ -70,7 +69,7 @@ This Docker image:
 - Runs `llama-server`
 - Exposes the AI assistant interface
 
-T-1985 is intentionally simple, reliable, and slightly outdated—by design.
+> T-1985 is intentionally simple, reliable, and slightly outdated—by design.
 It represents a first-generation machine intelligence: effective, but not perfect.
 
 ---
@@ -84,7 +83,7 @@ It represents a first-generation machine intelligence: effective, but not perfec
 
 This Docker image:
 - Exposes OpenWebUI API/Interface
-- Forwards requests to T-1985 (through a reverse proxy for autocompletion)
+- Forwards requests to T-1985 (through a reverse proxy for chatting)
 
 ---
 
