@@ -11,10 +11,21 @@ Everything runs in Docker. Everything is replaceable.
 
 ---
 
+## Note for beginners
+
+This projet is born from a melt of curiosity and need of local AI tools for my personnal projects.
+And after using it, I've decided to share it.
+This can be a bit tricky for begginers, that's why a suggest more user friendly solutions for begginer:
+- For personnal IA, start with GPT4All project
+- For image generation, prefer use AUTOMATIC1111
+
+---
+
 ## Project Philosophy
 
 T-1985 is not a single tool.
 It is an **ecosystem**.
+
 
 Each component plays a specific role in the machine hierarchy:
 - one builds intelligence,
